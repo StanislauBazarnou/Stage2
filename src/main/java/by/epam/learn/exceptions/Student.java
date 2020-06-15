@@ -1,4 +1,4 @@
-package by.epam.learn.ErrorsAndExceptions;
+package by.epam.learn.exceptions;
 
 import java.util.*;
 

@@ -1,15 +1,19 @@
-package by.epam.learn.ErrorsAndExceptions.util;
+package by.epam.learn.exceptions.util;
 
-import by.epam.learn.ErrorsAndExceptions.*;
-import by.epam.learn.ErrorsAndExceptions.exception.NullFacultyException;
-import by.epam.learn.ErrorsAndExceptions.exception.NullGroupException;
-import by.epam.learn.ErrorsAndExceptions.exception.NullStudentException;
-import by.epam.learn.ErrorsAndExceptions.exception.WrongMarkException;
+import by.epam.learn.exceptions.*;
+import by.epam.learn.exceptions.exception.NullFacultyException;
+import by.epam.learn.exceptions.exception.NullGroupException;
+import by.epam.learn.exceptions.exception.NullStudentException;
+import by.epam.learn.exceptions.exception.WrongMarkException;
 
 import java.util.List;
 import java.util.Map;
 
 public class ValidationUtil {
+
+    private ValidationUtil() {
+        throw new IllegalStateException("Utility class");
+    }
 
     //Релизовать исключение: Оценка ниже 0 или выше 10
     public static void checkMarkValue(List<Student> students, Subject searchSubject) throws WrongMarkException {
@@ -33,21 +37,21 @@ public class ValidationUtil {
 
     //Релизовать исключение: Отсутствие студентов в группе
     public static void checkStudentPresence(Group searchGroup) throws NullStudentException {
-        if (searchGroup.getStudents().size() < 1) {
-            throw new NullStudentException("Amount of students in " + searchGroup.name() + " should be more than 0");
+        if (searchGroup.getStudents().isEmpty()) {
+            throw new NullStudentException("Amount of students in " + searchGroup.getName() + " should be more than 0");
         }
     }
 
     //Релизовать исключение: Отсутствие групп на факультете
     public static void checkGroupPresence(Faculty searchFaculty) throws NullGroupException {
-        if (searchFaculty.getGroups().size() < 1) {
-            throw new NullGroupException("Amount of group in " + searchFaculty.name() + " should be more than 0");
+        if (searchFaculty.getGroups().isEmpty()) {
+            throw new NullGroupException("Amount of group in " + searchFaculty.getName() + " should be more than 0");
         }
     }
 
     //Релизовать исключение: Отсутствие факультетов в университете
     public static void checkFacultyPresence(University university) throws NullFacultyException {
-        if (University.getFaculties().size() < 1) {
+        if (university.getFaculties().isEmpty()) {
             throw new NullFacultyException("Amount of faculties should be more than 0 for University " +
                     university.getName());
         }

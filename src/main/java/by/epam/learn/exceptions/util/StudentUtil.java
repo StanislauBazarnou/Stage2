@@ -1,35 +1,35 @@
-package by.epam.learn.ErrorsAndExceptions.util;
+package by.epam.learn.exceptions.util;
 
-import by.epam.learn.ErrorsAndExceptions.*;
-import by.epam.learn.ErrorsAndExceptions.exception.NullGroupException;
-import by.epam.learn.ErrorsAndExceptions.exception.NullStudentException;
-import by.epam.learn.ErrorsAndExceptions.exception.WrongMarkException;
+import by.epam.learn.exceptions.*;
+import by.epam.learn.exceptions.exception.NullGroupException;
+import by.epam.learn.exceptions.exception.NullStudentException;
+import by.epam.learn.exceptions.exception.WrongMarkException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static by.epam.learn.ErrorsAndExceptions.util.ValidationUtil.*;
+import static by.epam.learn.exceptions.util.ValidationUtil.*;
 
 public class StudentUtil {
 
-    public static double averageMark(Integer[] marks) {
-        int sumInner = 0;
-        double average = 0;
-        for (Integer mark : marks) {
-            sumInner += mark;
-            average = (double) sumInner / marks.length;
-            average = (double) Math.round(average * 1000d) / 1000d;
-        }
-        return average;
+    private StudentUtil() {
+        throw new IllegalStateException("Utility class");
     }
 
-    public static List<Student> findSubjectOnSpecificFacultyAndSpecificGroup(Faculty searchFaculty, Group searchGroup,
-                                                                             Subject searchSubject) throws NullStudentException, NullGroupException {
+    public static double averageMark(Integer[] marks) {
+        return Arrays.stream(marks)
+                .mapToInt(Integer::intValue)
+                .average().orElse(Double.NaN);
+    }
+
+    public static List<Student> searchSubjectThroughoutFacultiesAndGroups(University university, Faculty searchFaculty, Group searchGroup,
+                                Subject searchSubject) throws NullStudentException, NullGroupException {
         checkStudentPresence(searchGroup);
         checkGroupPresence(searchFaculty);
         List<Student> studentsOnSpecificSubject = new ArrayList<>();
-        for (Faculty faculty : University.getFaculties()) {
+        for (Faculty faculty : university.getFaculties()) {
             if (faculty.equals(searchFaculty)) {
                 for (Group group : faculty.getGroups()) {
                     if (group.equals(searchGroup)) {
@@ -45,7 +45,7 @@ public class StudentUtil {
         return studentsOnSpecificSubject;
     }
 
-    public static List<Student> findSpecificSubjectAroundUniversity(Subject subject, List<Student> students) {
+    public static List<Student> searchSubjectThroughoutUniversity(Subject subject, List<Student> students) {
         List<Student> specificSubject = new ArrayList<>();
         for (Student student : students) {
             if (student.getSubjects().containsKey(subject)) {
@@ -58,6 +58,7 @@ public class StudentUtil {
     public static double averageMarkInOneSubject(List<Student> students, Subject searchSubject) throws WrongMarkException {
         double sum = 0;
         int count = 0;
+        double average = 0;
         for (Student student : students) {
             for (Map.Entry<Subject, Integer[]> entry : student.getSubjects().entrySet()) {
                 if (entry.getKey().equals(searchSubject)) {
@@ -67,7 +68,7 @@ public class StudentUtil {
                 }
             }
         }
-        double average = sum / count;
+        average = sum / count;
         average = (double) Math.round(average * 1000d) / 1000d;
         return average;
     }
@@ -75,6 +76,7 @@ public class StudentUtil {
     public static double studentAverageMarkInAllSubjects(List<Student> studentList, Student name) {
         double sum = 0;
         int count = 0;
+        double average = 0;
         for (Student student : studentList) {
             if (student.equals(name)) {
                 for (Map.Entry<Subject, Integer[]> entry : student.getSubjects().entrySet()) {
@@ -83,7 +85,7 @@ public class StudentUtil {
                 }
             }
         }
-        double average = sum / count;
+        average = sum / count;
         average = (double) Math.round(average * 100d) / 100d;
         return average;
     }

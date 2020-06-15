@@ -8,8 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 //1. Создать и заполнить файл случайными целыми числами. Отсортировать содержимое файла по возрастанию
 
 public class Task1 {
-    static File writingFile = new File("/home/stanislau/AutomatedTesting/AutomatedTestingTraining/Stage2/Java_Input_and_" +
-            "Output_Optional/data/Task1_Result.txt");
+    static File writingFile = new File("src/data/Task1_Result.txt");
     static int[] array = new int[20];
 
     public static void main(String[] args) {

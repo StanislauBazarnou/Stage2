@@ -1,16 +1,21 @@
-package by.epam.learn.ErrorsAndExceptions;
+package by.epam.learn.exceptions;
 
-import java.util.Arrays;
 import java.util.List;
 
-public enum Faculty {
-    FACULTY_OF_ECONOMICS(Arrays.asList(Group.FULL_TIME_815, Group.DISTANCE_715)),
-    FACULTY_OF_COMPUTER_SCIENCE(Arrays.asList(Group.FULL_TIME_915, Group.FULL_TIME_911)),
-    FACULTY_OF_NATURAL_SCIENCES(Arrays.asList(Group.DISTANCE_611));
-
+public class Faculty {
+    private String name;
     private List<Group> groups;
 
-    Faculty(List<Group> groups) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    Faculty(String name, List<Group> groups) {
+        this.name = name;
         this.groups = groups;
     }
 

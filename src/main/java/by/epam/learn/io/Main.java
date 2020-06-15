@@ -7,8 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 public class Main {
-    static Path path = Paths.get("/home/stanislau/AutomatedTesting/AutomatedTestingTraining/Stage2/Java_Input_" +
-            "and_Output/data/TaskIO.txt");
+    static Path path = Paths.get("src/data/TaskIO.txt");
 
     static void recursivePrint(File[] dir, int level) throws IOException {
         for (File file : dir) {
@@ -26,7 +25,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        File directory = new File("/home/stanislau/AutomatedTesting/AutomatedTestingTraining/Stage2/Java_Input_and_Output");
+        File directory = new File("by/epam/learn/InputAndOutput/");
         File[] dir = directory.listFiles();
         if (directory.exists() && directory.isDirectory()) {
             try {

@@ -1,4 +1,4 @@
-package by.epam.learn.ErrorsAndExceptions.exception;
+package by.epam.learn.exceptions.exception;
 
 public class NullFacultyException extends Exception{
     public NullFacultyException() {

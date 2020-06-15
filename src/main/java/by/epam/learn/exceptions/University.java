@@ -1,14 +1,14 @@
-package by.epam.learn.ErrorsAndExceptions;
+package by.epam.learn.exceptions;
 
 import java.util.List;
 
 public class University {
     private String name;
-    static List<Faculty> faculties;
+    private List<Faculty> faculties;
 
     public University(String name, List<Faculty> faculties) {
         this.name = name;
-        University.faculties = faculties;
+        this.faculties = faculties;
     }
 
     public String getName() {
@@ -19,12 +19,12 @@ public class University {
         this.name = name;
     }
 
-    public static List<Faculty> getFaculties() {
+    public List<Faculty> getFaculties() {
         return faculties;
     }
 
     public void setFaculties(List<Faculty> faculties) {
-        University.faculties = faculties;
+        this.faculties = faculties;
     }
 
     @Override
