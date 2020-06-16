@@ -1,4 +1,4 @@
-package by.epam.learn.InputAndOutputOptional;
+package by.epam.learn.iooptional;
 
 import java.io.*;
 import java.util.Scanner;
@@ -22,7 +22,9 @@ public class Task2 {
     static void createFile() {
         if (!writingFile.exists()) {
             try {
-                writingFile.createNewFile();
+                if (writingFile.createNewFile()) {
+                    System.out.println("File created");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Error during file creating");

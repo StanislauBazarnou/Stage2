@@ -1,4 +1,4 @@
-package by.epam.learn.InputAndOutputOptional;
+package by.epam.learn.iooptional;
 
 import java.io.*;
 
@@ -22,7 +22,8 @@ public class Task8 {
     static int linesCounter(File name) {
         int count = 0;
         try (LineNumberReader lineCounter = new LineNumberReader(new FileReader(name))) {
-            while (lineCounter.readLine() != null) {
+            String line = null;
+            while ((line = lineCounter.readLine()) != null) {
                 count = lineCounter.getLineNumber();
             }
         } catch (IOException e) {

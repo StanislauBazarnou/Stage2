@@ -1,4 +1,4 @@
-package by.epam.learn.InputAndOutputOptional;
+package by.epam.learn.iooptional;
 
 import java.io.*;
 import java.util.Arrays;
@@ -13,7 +13,6 @@ public class Task1 {
 
     public static void main(String[] args) {
         createFile();
-        fillingFileWithRandomNumbers();
         fillingArrayWithNumbersFromFile();
         sortAndWriteNumberIntoFile();
         System.out.println("Program finished successfully");
@@ -22,11 +21,15 @@ public class Task1 {
     static void createFile() {
         if (!writingFile.exists()) {
             try {
-                writingFile.createNewFile();
+                if (writingFile.createNewFile()) {
+                    System.out.println("File created");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Error has occurred while creating a file");
             }
+        } else if (writingFile.exists()) {
+            fillingFileWithRandomNumbers();
         }
     }
 
@@ -42,7 +45,7 @@ public class Task1 {
         }
     }
 
-    static int[] fillingArrayWithNumbersFromFile() {
+    static void fillingArrayWithNumbersFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(writingFile))) {
             String[] arrayString = reader.readLine().split(" ");
             for (int i = 0; i < 20; i++) {
@@ -51,7 +54,6 @@ public class Task1 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return array;
     }
 
     static void sortAndWriteNumberIntoFile() {
