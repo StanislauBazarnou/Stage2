@@ -7,10 +7,8 @@ import java.io.*;
 // для разделения операторов
 
 public class Task8 {
-    static File readingFile = new File("/home/stanislau/AutomatedTesting/AutomatedTestingTraining/Stage2/" +
-            "Java_Input_and_Output_Optional/src/main/java/by/epam/learn/main/task7optional/Task2.java");
-    static File writingFile = new File("/home/stanislau/AutomatedTesting/AutomatedTestingTraining/Stage2/Java_" +
-            "Input_and_Output_Optional/data/Task8_Result.txt");
+    static File readingFile = new File("src/main/java/by/epam/learn/iooptional/Task2.java");
+    static File writingFile = new File("src/data/Task8_Result.txt");
     static String[] array = new String[linesCounter(readingFile)];
 
     public static void main(String[] args) {
@@ -22,8 +20,7 @@ public class Task8 {
     static int linesCounter(File name) {
         int count = 0;
         try (LineNumberReader lineCounter = new LineNumberReader(new FileReader(name))) {
-            String line = null;
-            while ((line = lineCounter.readLine()) != null) {
+            while (lineCounter.readLine() != null) {
                 count = lineCounter.getLineNumber();
             }
         } catch (IOException e) {

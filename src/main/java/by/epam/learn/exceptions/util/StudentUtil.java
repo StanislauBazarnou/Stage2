@@ -68,7 +68,9 @@ public class StudentUtil {
                 }
             }
         }
-        average = sum / count;
+        if (count != 0) {
+            average = sum / count;
+        }
         average = (double) Math.round(average * 1000d) / 1000d;
         return average;
     }
@@ -85,7 +87,9 @@ public class StudentUtil {
                 }
             }
         }
-        average = sum / count;
+        if (count != 0) {
+            average = sum / count;
+        }
         average = (double) Math.round(average * 100d) / 100d;
         return average;
     }
