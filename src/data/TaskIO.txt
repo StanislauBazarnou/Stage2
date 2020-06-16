@@ -1,0 +1,36 @@
+[main]
+	[resources]
+	[java]
+		[by]
+			[epam]
+				[learn]
+					[io]
+						Runner.java
+						Sandbox3.java
+						Main.java
+					[iooptional]
+						Task1.java
+						Task8.java
+						Task2.java
+					[exceptions]
+						Subject.java
+						Group.java
+						[exception]
+							NullFacultyException.java
+							WrongMarkException.java
+							NullStudentException.java
+							NullGroupException.java
+						Faculty.java
+						[util]
+							ValidationUtil.java
+							StudentUtil.java
+						University.java
+						Student.java
+						Main.java
+[test]
+	[java]
+[data]
+	Task1_Result.txt
+	Task2_Result.txt
+	Amon_Amarth.txt
+	TaskIO.txt
