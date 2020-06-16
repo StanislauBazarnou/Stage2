@@ -1,4 +1,4 @@
-package by.epam.learn.InputAndOutput;
+package by.epam.learn.io;
 
 import java.io.BufferedWriter;
 import java.io.File;
