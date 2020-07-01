@@ -4,9 +4,10 @@
 		[by]
 			[epam]
 				[learn]
+					[thread]
+						Car.java
+						Main.java
 					[io]
-						Runner.java
-						Sandbox3.java
 						Main.java
 					[iooptional]
 						Task1.java
@@ -32,5 +33,6 @@
 [data]
 	Task1_Result.txt
 	Task2_Result.txt
+	Task8_Result.txt
 	Amon_Amarth.txt
 	TaskIO.txt

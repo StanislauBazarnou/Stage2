@@ -8,7 +8,7 @@ import java.io.*;
 
 public class Task8 {
     static File readingFile = new File("src/main/java/by/epam/learn/iooptional/Task2.java");
-    static File writingFile = new File("src/data/Task8_Result.txt");
+    static File writingFile = new File("src/main/resources/Task8_Result.txt");
     static String[] array = new String[linesCounter(readingFile)];
 
     public static void main(String[] args) {

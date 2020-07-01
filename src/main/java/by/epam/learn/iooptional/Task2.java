@@ -6,7 +6,7 @@ import java.util.Scanner;
 //2. Прочитать текст Java-программы и все слова public в объявлении атрибутов и методов класса заменить на слово private
 
 public class Task2 {
-    static String pathToWritingFile = "src/data/Task2_Result.txt";
+    static String pathToWritingFile = "src/main/resources/Task2_Result.txt";
     static File writingFile = new File(pathToWritingFile);
     static String pathToReadingFile = "src/main/java/by/epam/learn/iooptional/Task2.java";
     static File readingFile = new File(pathToReadingFile);

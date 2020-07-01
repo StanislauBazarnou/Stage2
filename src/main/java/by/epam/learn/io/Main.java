@@ -60,7 +60,7 @@ public class Main {
 
     public static void main(String[] args) {
         Path path = Paths.get(args[0]);
-        Path pathToWritingFile = Paths.get("src/data/TaskIO.txt");
+        Path pathToWritingFile = Paths.get("src/main/resources/TaskIO.txt");
         File file = new File(String.valueOf(path));
         File[] dir = file.listFiles();
 

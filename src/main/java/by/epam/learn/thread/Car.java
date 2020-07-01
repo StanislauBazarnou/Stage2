@@ -5,8 +5,9 @@ import java.util.concurrent.TimeUnit;
 
 class Car extends Thread {
     private int carNumber;
-    private static final Semaphore PARKING = new Semaphore(3, true);
-    private static final boolean[] PARKING_PLACES = new boolean[3];
+    private static final int SPOT_NUMBERS = 3;
+    private static final Semaphore PARKING = new Semaphore(getSpotNumbers(), true);
+    private static final boolean[] PARKING_PLACES = new boolean[getSpotNumbers()];
 
     public Car(int carNumber) {
         this.carNumber = carNumber;
@@ -14,6 +15,10 @@ class Car extends Thread {
 
     public int getCarNumber() {
         return carNumber;
+    }
+
+    public static int getSpotNumbers() {
+        return SPOT_NUMBERS;
     }
 
     public void setCarNumber(int carNumber) {
@@ -36,7 +41,7 @@ class Car extends Thread {
 
             if (getPARKING().tryAcquire(3000, TimeUnit.MILLISECONDS)) {
                 synchronized (getParkingPlaces()) {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < getSpotNumbers(); i++) {
                         if (!getParkingPlaces()[i]) {
                             getParkingPlaces()[i] = true;
                             parkingSpot = i;
@@ -50,7 +55,7 @@ class Car extends Thread {
                 getPARKING().release();
             }
 
-            Thread.sleep(5000);
+            Thread.sleep(4000);
 
             synchronized (getParkingPlaces()) {
                 getParkingPlaces()[parkingSpot] = false;
