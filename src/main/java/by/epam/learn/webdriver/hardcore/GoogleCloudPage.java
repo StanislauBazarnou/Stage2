@@ -14,7 +14,6 @@ public class GoogleCloudPage {
     private static final String HOMEPAGE_URL = "https://cloud.google.com/";
     private static final String REQUEST_TEXT = "Google Cloud Platform Pricing Calculator";
 
-
     @FindBy(xpath = "//div[@class='devsite-searchbox']")
     WebElement searchButton;
 

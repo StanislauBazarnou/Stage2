@@ -16,7 +16,7 @@ public class EstimatePage {
     }
 
     @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(text(),'VM class:')]")
-    public WebElement machineTypeField;
+    public WebElement machineClassField;
 
     @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(text(),'Instance type:')]")
     WebElement instanceTypeField;
@@ -34,29 +34,29 @@ public class EstimatePage {
     WebElement totalCostField;
 
 
-    public String findResultMachineClassText() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(machineTypeField));
-        return machineTypeField.getText().toLowerCase();
+    public String findEstimateMachineClassText() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(machineClassField));
+        return machineClassField.getText();
     }
 
-    public String findResultInstanceTypeText() {
+    public String findEstimateInstanceTypeText() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(instanceTypeField));
-        return instanceTypeField.getText().toLowerCase();
+        return instanceTypeField.getText();
     }
 
-    public String findResultRegionText() {
+    public String findEstimateRegionText() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(regionField));
-        return regionField.getText().toLowerCase();
+        return regionField.getText();
     }
 
-    public String findResultSsdText() {
+    public String findEstimateSsdText() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(ssdField));
-        return ssdField.getText().toLowerCase();
+        return ssdField.getText();
     }
 
     public String findCommitmentTermText() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(commitmentTermField));
-        return commitmentTermField.getText().toLowerCase();
+        return commitmentTermField.getText();
     }
 
     public String findTotalCost() {

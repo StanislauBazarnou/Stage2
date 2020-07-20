@@ -11,7 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class FourthTaskTest {
+public class EmailTaskTest {
     private WebDriver driver;
     private TemporaryEmailPage resultPage;
 
@@ -25,8 +25,8 @@ public class FourthTaskTest {
                 .fillInSearchInputLine()
                 .selectDesiredSearchResult()
                 .clickComputerEngineButton()
-                .fillInNumberOfInstance()
-                .fillInRequiredData()
+                .fillNumberOfInstances()
+                .fillRequiredData()
                 .clickEmailEstimateButton()
                 .getEmail()
                 .addEmail();

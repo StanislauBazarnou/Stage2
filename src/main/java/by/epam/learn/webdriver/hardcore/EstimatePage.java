@@ -56,8 +56,8 @@ public class EstimatePage {
         emailField.sendKeys(email);
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(emailSendButton));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", emailSendButton);
-        ArrayList<String> browserPages = new ArrayList<String>(driver.getWindowHandles());
+        emailSendButton.click();
+        ArrayList<String> browserPages = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(browserPages.get(1));
         return new TemporaryEmailPage(driver);
     }

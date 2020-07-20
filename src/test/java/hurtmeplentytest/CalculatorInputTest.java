@@ -31,33 +31,33 @@ public class CalculatorInputTest {
                 .fillInSearchInputLine()
                 .selectDesiredSearchResult()
                 .clickComputerEngineButton()
-                .fillInNumberOfInstance()
-                .fillInRequiredData();
+                .fillNumberOfInstances()
+                .fillRequiredData();
     }
 
     @Test
     public void machineClassFieldMatching() {
-        Assert.assertTrue(resultPage.findResultMachineClassText().contains(EXPECTED_MACHINE_CLASS.toLowerCase()));
+        Assert.assertTrue(resultPage.findEstimateMachineClassText().contains(EXPECTED_MACHINE_CLASS));
     }
 
     @Test
     public void instanceTypeFieldMatching() {
-        Assert.assertTrue(resultPage.findResultInstanceTypeText().contains(EXPECTED_INSTANCE_TYPE.toLowerCase()));
+        Assert.assertTrue(resultPage.findEstimateInstanceTypeText().contains(EXPECTED_INSTANCE_TYPE));
     }
 
     @Test
     public void regionFieldMatching() {
-        Assert.assertTrue(resultPage.findResultRegionText().contains(EXPECTED_REGION.toLowerCase()));
+        Assert.assertTrue(resultPage.findEstimateRegionText().contains(EXPECTED_REGION));
     }
 
     @Test
     public void ssdFieldMatching() {
-        Assert.assertTrue(resultPage.findResultSsdText().contains(EXPECTED_SSD.toLowerCase()));
+        Assert.assertTrue(resultPage.findEstimateSsdText().contains(EXPECTED_SSD));
     }
 
     @Test
     public void commitmentTermFieldMatching() {
-        Assert.assertTrue(resultPage.findCommitmentTermText().contains(EXPECTED_COMMITMENT_TERM.toLowerCase()));
+        Assert.assertTrue(resultPage.findCommitmentTermText().contains(EXPECTED_COMMITMENT_TERM));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class CalculatorInputTest {
 
     @AfterClass(alwaysRun = true)
     public void browserTearDown() {
-        driver.quit();
+//        driver.quit();
         driver = null;
     }
 }

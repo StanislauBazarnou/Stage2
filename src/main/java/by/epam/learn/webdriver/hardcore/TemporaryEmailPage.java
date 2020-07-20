@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class TemporaryEmailPage {
     WebDriver driver;
+
     public static final String TEMPORARY_MAIL_URL = "https://10minutemail.com";
     public static final By MAIL_LOCATOR = By.xpath("//*[@id='mail_address']");
     public static final By EXPECTED_MAIL_LOCATOR = By.xpath("//*[@id='mail_messages_content']//div[@class = 'small_message_icon_box']");
@@ -21,7 +22,6 @@ public class TemporaryEmailPage {
 
     public EstimatePage getEmail() {
         driver.get(TEMPORARY_MAIL_URL);
-        //через @FindBy почему-то выкидывает NullPointerException, приходится искать через константу типа By
         WebElement mail = new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.visibilityOfElementLocated(MAIL_LOCATOR));
         new WebDriverWait(driver, 20).until(ExpectedConditions.attributeToBeNotEmpty(mail, "value"));

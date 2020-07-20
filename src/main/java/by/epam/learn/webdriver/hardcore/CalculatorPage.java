@@ -19,70 +19,59 @@ public class CalculatorPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy (xpath = "//*[@id='cloud-site']/devsite-iframe/iframe")
+    @FindBy(xpath = "//*[@id='cloud-site']/devsite-iframe/iframe")
     WebElement firstFrame;
-
     @FindBy (id = "myFrame")
     WebElement secondFrame;
-
     @FindBy (xpath = "//*[@id='mainForm']//div[@title='Compute Engine']")
     WebElement computeEngineButton;
 
-    @FindBy (id = "input_55")
-    WebElement inputLineNumberOfInstances;
-
-    @FindBy(id = "select_value_label_48")
-    WebElement choiceOfOperationSystem;
-
-    @FindBy (id = "select_option_57")
-    WebElement desiredOperationSystem;
-
-    @FindBy (id = "select_value_label_49")
-    WebElement choiceOfMachineClass;
-
-    @FindBy (id = "select_option_69")
-    WebElement desiredMachineClass;
-
-    @FindBy (id = "select_value_label_52")
-    WebElement choiceOfInstanceType;
-
-    @FindBy (id = "select_option_208")
-    WebElement desiredInstanceType;
-
-    @FindBy (xpath = "//md-checkbox[@aria-label='Add GPUs']")
-    WebElement addGPUChexkbox;
-
-    @FindBy (id = "select_value_label_326")
-    WebElement choiceOfNumberOfGPUs;
-
-    @FindBy (id = "select_option_333")
-    WebElement desiredNumberOfGPUs;
-
-    @FindBy (id = "select_value_label_327")
-    WebElement choiceOfGPUType;
-
-    @FindBy (id = "select_option_340")
-    WebElement desiredGPUType;
-
-    @FindBy (id = "select_value_label_166")
-    WebElement choiceOfLocalSSD;
-
-    @FindBy (id = "select_option_229")
-    WebElement desiredLocalSSD;
+    @FindBy (id = "input_60")
+    WebElement numberOfInstancesField;
 
     @FindBy (id = "select_value_label_53")
-    WebElement choiceOfLocation;
+    WebElement operationSystemDropdown;
+    @FindBy (xpath = "(//div[contains(text(),'Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS')])[1]")
+    WebElement operationSystemChoice;
 
-    @FindBy (id = "select_option_177")
-    WebElement desiredLocation;
+    @FindBy (xpath = "//label[text()='Machine Class']//parent::md-input-container//div[@class='md-text']")
+    WebElement choiceOfMachineClass;
+    @FindBy (xpath = "//md-option[@id='select_option_74']/div")
+    WebElement machineClassChoice;
 
-    @FindBy (id = "select_value_label_54")
-    WebElement choiceOfCommittedUsage;
+    @FindBy (xpath = "//md-select-value[@id='select_value_label_57']/span[1]/div")
+    WebElement machineTypeDropdown;
+    @FindBy (xpath = "//md-option[@id='select_option_227']/div[contains(text(), 'n1-standard-8')]")
+    WebElement machineTypeChoice;
 
-    @FindBy (id = "select_option_87")
-    WebElement desiredCommittedUsage;
+    @FindBy (xpath = "//md-card-content[@id='mainForm']//div[contains(text(), 'GPUs aren’t available for')]/..//md-checkbox")
+    WebElement addGpuCheckbox;
+    @FindBy (xpath = "//md-select-value[@id='select_value_label_349']/span/div")
+    WebElement numberOfGPUsDropdown;
+    @FindBy (xpath = "//md-option[@id='select_option_401']/div")
+    WebElement numberOfGPUsChoice;
 
-    @FindBy (xpath = "//button[@aria-label='Add to Estimate']")
+    @FindBy (xpath = "//md-select-value[@id='select_value_label_350']//div")
+    WebElement typeOfGPUDropdown;
+    @FindBy (id = "select_option_363")
+    WebElement typeOfGPUChoice;
+
+    @FindBy (id = "select_value_label_183")
+    WebElement localSSDDropdown;
+    @FindBy (id = "select_option_248")
+    WebElement localSSDChoice;
+
+    @FindBy (id = "select_value_label_58")
+    WebElement locationDropdown;
+    @FindBy (id = "select_option_195")
+    WebElement locationChoice;
+
+    @FindBy (id = "select_value_label_59")
+    WebElement committedUsageDropdown;
+    @FindBy (id = "select_option_92")
+    WebElement committedUsageChoice;
+
+    @FindBy (xpath = "//form[@name='ComputeEngineForm']//button[@aria-label = 'Add to Estimate']")
     WebElement buttonAddToEstimate;
 
     @FindBy (xpath = "//*[@id='resultBlock']//h2[@class='md-title']")
@@ -95,44 +84,44 @@ public class CalculatorPage {
         return this;
     }
 
-    public CalculatorPage fillInNumberOfInstance() {
-        inputLineNumberOfInstances.sendKeys(NUMBER_OF_INSTANCE);
+    public CalculatorPage fillNumberOfInstances() {
+        numberOfInstancesField.sendKeys(NUMBER_OF_INSTANCE);
         return this;
     }
 
-    public EstimatePage fillInRequiredData() {
-        expandSelectionOptionsAndSelectDesired(choiceOfOperationSystem, desiredOperationSystem);
-        expandSelectionOptionsAndSelectDesired(choiceOfMachineClass, desiredMachineClass);
-        expandSelectionOptionsAndSelectDesired(choiceOfInstanceType, desiredInstanceType);
-        clickCheckbox(addGPUChexkbox);
-        expandSelectionOptionsAndSelectDesired(choiceOfNumberOfGPUs, desiredNumberOfGPUs);
-        expandSelectionOptionsAndSelectDesired(choiceOfGPUType, desiredGPUType);
-        expandSelectionOptionsAndSelectDesired(choiceOfLocalSSD, desiredLocalSSD);
-        expandSelectionOptionsAndSelectDesired(choiceOfLocation, desiredLocation);
-        expandSelectionOptionsAndSelectDesired(choiceOfCommittedUsage, desiredCommittedUsage);
+    public EstimatePage fillRequiredData() {
+        selectDropdownAndSelectChoice(operationSystemDropdown, operationSystemChoice);
+        selectDropdownAndSelectChoice(choiceOfMachineClass, machineClassChoice);
+        selectDropdownAndSelectChoice(machineTypeDropdown, machineTypeChoice);
+        clickCheckbox(addGpuCheckbox);
+        selectDropdownAndSelectChoice(numberOfGPUsDropdown, numberOfGPUsChoice);
+        selectDropdownAndSelectChoice(typeOfGPUDropdown, typeOfGPUChoice);
+        selectDropdownAndSelectChoice(localSSDDropdown, localSSDChoice);
+        selectDropdownAndSelectChoice(locationDropdown, locationChoice);
+        selectDropdownAndSelectChoice(committedUsageDropdown, committedUsageChoice);
         clickButton(buttonAddToEstimate);
         costOnPage = new WebDriverWait(driver, 10).until(ExpectedConditions
                 .visibilityOf(costOnPageDOMElement)).getText();
         return new EstimatePage(driver);
     }
 
-    public CalculatorPage expandSelectionOptionsAndSelectDesired(WebElement choice, WebElement desired) {
+    public CalculatorPage selectDropdownAndSelectChoice(WebElement choice, WebElement desired) {
         new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(choice));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", choice);
+        choice.click();
         new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(desired));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", desired);
+        desired.click();
         return this;
     }
 
     public CalculatorPage clickCheckbox(WebElement checkbox) {
         new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(checkbox));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+        checkbox.click();
         return this;
     }
 
     public CalculatorPage clickButton(WebElement button) {
         new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(button));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        button.click();
         return this;
     }
 }
