@@ -1,5 +1,6 @@
 package by.epam.learn.webdriver.hurtmeplenty;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,12 +30,12 @@ public class CalculatorPage {
 
     @FindBy (id = "select_value_label_53")
     WebElement operationSystemDropdown;
-    @FindBy (xpath = "(//div[contains(text(),'Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS')])[1]")
+    @FindBy (id = "select_option_62")
     WebElement operationSystemChoice;
 
-    @FindBy (xpath = "//label[text()='Machine Class']//parent::md-input-container//div[@class='md-text']")
-    WebElement choiceOfMachineClass;
-    @FindBy (xpath = "//md-option[@id='select_option_74']/div[@class='md-text']")
+    @FindBy (id = "select_value_label_54")
+    WebElement machineClassDropdown;
+    @FindBy (id = "select_option_74")
     WebElement machineClassChoice;
 
     @FindBy (xpath = "//md-select-value[@id='select_value_label_57']/span[1]/div")
@@ -42,14 +43,14 @@ public class CalculatorPage {
     @FindBy (xpath = "//md-option[@id='select_option_227']/div[contains(text(), 'n1-standard-8')]")
     WebElement machineTypeChoice;
 
-    @FindBy (xpath = "//md-card-content[@id='mainForm']//div[contains(text(), 'GPUs aren’t available for')]/..//md-checkbox")
+    @FindBy (xpath = "(//md-checkbox[@aria-label='Add GPUs' and @role='checkbox'])[1]")
     WebElement addGpuCheckbox;
-    @FindBy (xpath = "//md-select-value[@id='select_value_label_349']/span/div")
+    @FindBy (id = "select_value_label_349")
     WebElement numberOfGPUsDropdown;
-    @FindBy (xpath = "//md-option[@id='select_option_401']/div")
+    @FindBy (id = "select_option_356")
     WebElement numberOfGPUsChoice;
 
-    @FindBy (xpath = "//md-select-value[@id='select_value_label_350']//div")
+    @FindBy (id = "select_value_label_350")
     WebElement typeOfGPUDropdown;
     @FindBy (id = "select_option_363")
     WebElement typeOfGPUChoice;
@@ -85,7 +86,7 @@ public class CalculatorPage {
 
     public EstimatePage fillRequiredData() {
         selectDropdownAndSelectChoice(operationSystemDropdown, operationSystemChoice);
-        selectDropdownAndSelectChoice(choiceOfMachineClass, machineClassChoice);
+        selectDropdownAndSelectChoice(machineClassDropdown, machineClassChoice);
         selectDropdownAndSelectChoice(machineTypeDropdown, machineTypeChoice);
         clickCheckbox(addGpuCheckbox);
         selectDropdownAndSelectChoice(numberOfGPUsDropdown, numberOfGPUsChoice);
@@ -98,24 +99,30 @@ public class CalculatorPage {
     }
 
     public CalculatorPage selectDropdownAndSelectChoice(WebElement choice, WebElement desired) {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(choice));
-        choice.click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(desired));
-        desired.click();
+        waitVisibilityOf(choice);
+        clickThroughJS(choice);
+        waitVisibilityOf(desired);
+        clickThroughJS(desired);
         return this;
     }
 
     public CalculatorPage clickCheckbox(WebElement checkbox) {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(checkbox));
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
-        checkbox.click();
+        waitVisibilityOf(checkbox);
+        clickThroughJS(checkbox);
         return this;
     }
 
     public CalculatorPage clickButton(WebElement button) {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(button));
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
-        button.click();
+        waitVisibilityOf(button);
+        clickThroughJS(button);
         return this;
+    }
+
+    public void waitVisibilityOf(WebElement element){
+        new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void clickThroughJS(WebElement element){
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 }

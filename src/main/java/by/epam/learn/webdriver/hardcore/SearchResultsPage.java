@@ -19,7 +19,7 @@ public class SearchResultsPage {
     WebElement desiredSearchResult;
 
     public CalculatorPage selectDesiredSearchResult() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(desiredSearchResult));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(desiredSearchResult));
         desiredSearchResult.click();
         return new CalculatorPage(driver);
     }

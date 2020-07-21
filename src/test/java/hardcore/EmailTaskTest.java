@@ -14,13 +14,19 @@ import org.testng.annotations.Test;
 public class EmailTaskTest {
     private WebDriver driver;
     private TemporaryEmailPage resultPage;
+    private CalculatorPage calculatorPage;
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
 
     @BeforeMethod(alwaysRun = true)
     public void getSourceData() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        resultPage = new GoogleCloudPage(driver)
+        result = new GoogleCloudPage(driver)
                 .openHomePage()
                 .fillInSearchInputLine()
                 .selectDesiredSearchResult()
@@ -29,12 +35,14 @@ public class EmailTaskTest {
                 .fillRequiredData()
                 .clickEmailEstimateButton()
                 .getEmail()
-                .addEmail();
+                .addEmail()
+                .getCostInLetter();
     }
 
     @Test
     public void compareCostsFromDifferentSources() {
-        Assert.assertTrue(CalculatorPage.costOnPage.contains(resultPage.getCostInLetter()));
+        Assert.assertTrue(result.contains(getResult()));
+        System.out.println(result + " = " + getResult());
     }
 
     @AfterMethod(alwaysRun = true)

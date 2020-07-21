@@ -6,13 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TemporaryEmailPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     public static final String TEMPORARY_MAIL_URL = "https://10minutemail.com";
-    public static final By MAIL_LOCATOR = By.xpath("//*[@id='mail_address']");
+    public static final By MAIL_LOCATOR = By.xpath("//div[@id='copy_address']");
     public static final By EXPECTED_MAIL_LOCATOR = By.xpath("//*[@id='mail_messages_content']//div[@class = 'small_message_icon_box']");
     public static final By COST_FROM_MAIL_LOCATOR = By.xpath("//*[@id='mobilepadding']/td/h2");
 
@@ -22,11 +26,16 @@ public class TemporaryEmailPage {
 
     public EstimatePage getEmail() {
         driver.get(TEMPORARY_MAIL_URL);
-        WebElement mail = new WebDriverWait(driver, 20)
+        new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.visibilityOfElementLocated(MAIL_LOCATOR));
-        new WebDriverWait(driver, 20).until(ExpectedConditions.attributeToBeNotEmpty(mail, "value"));
-        String emailStringValue = mail.getAttribute("value");
-        ArrayList<String> browserPages = new ArrayList<String>(driver.getWindowHandles());
+        driver.findElement(MAIL_LOCATOR).click();
+        String emailStringValue = null;
+        try {
+            emailStringValue = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+        } catch (UnsupportedFlavorException | IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> browserPages = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(browserPages.get(0));
         return new EstimatePage(driver, emailStringValue);
     }
@@ -39,6 +48,6 @@ public class TemporaryEmailPage {
                 .until(ExpectedConditions.presenceOfElementLocated(COST_FROM_MAIL_LOCATOR));
         String costInLetter = costFromMail.getText();
         String[] array = costInLetter.split(":");
-        return  array[1].trim();
+        return array[1].trim();
     }
 }

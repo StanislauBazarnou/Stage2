@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 
 public class EstimatePage {
-    WebDriver driver;
-    String email;
+    private WebDriver driver;
+    private String email;
 
     public EstimatePage(WebDriver driver) {
         this.driver = driver;
@@ -34,31 +34,38 @@ public class EstimatePage {
     @FindBy (xpath = "//*[@id='myFrame']")
     WebElement secondFrameEmail;
 
-    @FindBy (xpath = "//*[@id='input_395']")
+    @FindBy (xpath = "//input[@ng-model='emailQuote.user.email']")
     WebElement emailField;
 
     @FindBy (xpath = "//button[@aria-label='Send Email']")
     WebElement emailSendButton;
 
     public TemporaryEmailPage clickEmailEstimateButton() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(emailEstimateButton));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", emailEstimateButton);
+        waitVisibilityOf(emailEstimateButton);
+        clickThroughJS(emailEstimateButton);
         ((JavascriptExecutor) driver).executeScript("window.open()");
-        ArrayList<String> browserPages = new ArrayList<String>(driver.getWindowHandles());
+        ArrayList<String> browserPages = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(browserPages.get(1));
         return new TemporaryEmailPage(driver);
     }
 
     public TemporaryEmailPage addEmail() {
-        driver.switchTo().frame(firstFrameEmail).switchTo().frame(secondFrameEmail);
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOf(emailField));
+        driver.switchTo().frame(firstFrameEmail).switchTo().frame(secondFrameEmail); //for what?
+        waitVisibilityOf(emailField);
         emailField.sendKeys(email);
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.elementToBeClickable(emailSendButton));
-        emailSendButton.click();
+        clickThroughJS(emailSendButton);
         ArrayList<String> browserPages = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(browserPages.get(1));
         return new TemporaryEmailPage(driver);
+    }
+
+    public void waitVisibilityOf(WebElement element){
+        new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void clickThroughJS(WebElement element){
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 }

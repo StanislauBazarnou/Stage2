@@ -17,7 +17,7 @@ public class CalculatorInputTest {
     private static final String EXPECTED_MACHINE_CLASS = "regular";
     private static final String EXPECTED_INSTANCE_TYPE = "n1-standard-8";
     private static final String EXPECTED_REGION = "Frankfurt";
-    private static final String EXPECTED_SSD = "2x375 GB";
+    private static final String EXPECTED_SSD = "2x375 GiB";
     private static final String EXPECTED_COMMITMENT_TERM = "1 Year";
     private static final String EXPECTED_TOTAL_COST = "1,082.77";
 
