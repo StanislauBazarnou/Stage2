@@ -90,12 +90,14 @@ public class CalculatorPage {
     }
 
     private void specifyOptionFromDropdownList(String dropdownList, String option) {
-        String dropdownXpath = String.format("//label[text()='%s']/..//md-select-value", dropdownList);
+        String dropdownXpath = String.format("//label[text()='%s']/..//md-select", dropdownList);
         WebElement specifiedDropdown = driver.findElement(By.xpath(dropdownXpath));
         waitVisibilityOf(specifiedDropdown);
         clickThroughJS(specifiedDropdown);
 
-        String xpath = String.format("//md-select-menu//md-option//div[contains(text(), '%s')]", option);
+        String ariaOwns = specifiedDropdown.getAttribute("aria-owns");
+
+        String xpath = String.format("//*[id='%s']//div[contains(text(), '%s')]", ariaOwns, option);
         WebElement specifiedOption = driver.findElement(By.xpath(xpath));
         waitVisibilityOf(specifiedOption);
         clickThroughJS(specifiedOption);
